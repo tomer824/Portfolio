@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{form.as_p}}
+  
+    <button type="submit">Submit</button>
+</form>
+<br>
+<p>No account? New user signup here: <a href="{% url 'customer-signup' %}">User Registration</a></p>
+<p>New venue signup here: <a href="{% url 'venue-signup' %}">Venue Registration</a></p>
+
+    {% endblock %}
+    {% comment %}
+
+
+<!-- #import loginview in urls
+# import logout view in urls -->
+
+{% endcomment %}

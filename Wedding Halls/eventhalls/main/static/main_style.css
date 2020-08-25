@@ -1,0 +1,14 @@
+/* .main_jumbo{
+    text-align: center;
+} */
+
+.main_content{
+    display : flex;
+    justify-content: center;
+}
+
+.content_box{
+    width : 200px;
+    margin : 20px;
+    text-align: center;
+}

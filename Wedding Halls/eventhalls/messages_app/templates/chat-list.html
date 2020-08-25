@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+
+{% block content %}
+	{% for message in messages %}
+		{% if user_type == 'venue' %}
+			<a href="{% url 'single_chat_venue' message.customer.id %}"></a>
+		{% else %}
+			<a href="{% url 'single_chat_customer' message.venue.id %}"></a>
+		{% endif %}
+    {% endfor %}
+
+{% endblock %}

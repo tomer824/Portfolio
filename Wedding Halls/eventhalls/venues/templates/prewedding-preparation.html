@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method=POST>
+{% csrf_token %}
+
+
+<h2>Pre-Wedding Preparation</h2>
+
+<table>
+    <h4>Tastings</h4>
+    {{TastingForm}}
+</table>
+<table>
+    <h4>Rehearsal Dinner and Ceremony</h4>
+    {{RehearsalForm}}
+</table>
+<table>
+    <h4>Decorations</h4>
+    {{DecorationForm}}
+</table>
+<table>
+    <h4>Centerpieces</h4>
+    {{CenterPieceForm}}
+</table>
+<table>
+    <h4>Arrival and Setup</h4>
+    {{ArrivalSetUpForm}}
+</table>
+
+<button type="submit">Submit</button>
+
+</form>
+
+{% endblock %}

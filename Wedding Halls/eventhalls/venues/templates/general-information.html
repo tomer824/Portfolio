@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method=POST>
+{% csrf_token %}
+
+<h2>General Information</h2>
+<table>
+    {{VenueDetailForm}}
+    {{DanceFloorForm}}
+    {{VenueDetailForm2}}
+</table>
+
+
+<button type="submit">Submit</button>
+
+</form>
+
+{% endblock %}
