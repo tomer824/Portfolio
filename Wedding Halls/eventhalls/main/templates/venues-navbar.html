@@ -17,18 +17,17 @@
             Edit Venue Details
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{% url 'venues:general-information' %}">General Information</a>
-            <a class="dropdown-item" href="{% url 'venues:prewedding-prep' %}">Pre-Wedding Preparation</a>
-            <a class="dropdown-item" href="{% url 'venues:food_and_drink' %}">Food and Drink Options</a>
-            <a class="dropdown-item" href="#">Ceremony and Reception</a>
-            <a class="dropdown-item" href="#">Staffing Options</a>
-            <a class="dropdown-item" href="#">Accomodations and Parking</a>
-            <a class="dropdown-item" href="#">Venue Limitations</a>
-            <a class="dropdown-item" href="#">Additional Information</a>
-            <a class="dropdown-item" href="#">Payment Options and Details</a>
-            <a class="dropdown-item" href="#">Venue Pictures</a>
-            <a class="dropdown-item" href="#">Wedding Day Contact Person</a>
-            <a class="dropdown-item" href="#">General Contact Information</a>
+            <a href="{% url 'venues:general-information' %}">General Information</a><br>
+            <a href="{% url 'venues:prewedding-prep' %}">Pre-Wedding Preparation</a><br>
+            <a href="{% url 'venues:food_and_drink' %}">Food and Drink Options</a><br>
+            <a href="{% url 'venues:ceremony_and_reception' %}">Ceremony and Reception</a><br>
+            <a href="{% url 'venues:decorations' %}">Decorations and Floral Arrangements</a><br>
+            <a href="{% url 'venues:staffing' %}">Staffing Options</a><br>
+            <a href="{% url 'venues:accommodations_and_parking' %}">Accommodations and Parking</a><br>
+            <a href="{% url 'venues:additional-information' %}">Additional Information</a><br>
+            <a href="{% url 'venues:payment-options' %}">Payment Options and Details</a><br>
+            <a href="{% url 'venues:venue-images' %}">Venue Pictures</a><br>
+            <a href="{% url 'venues:contact-info' %}">Contact Information</a><br>
           </div>
         </li>
         <li class="nav-item active">

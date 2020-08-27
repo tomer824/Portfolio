@@ -12,3 +12,9 @@
     margin : 20px;
     text-align: center;
 }
+
+.footer{
+    background-color: lightcyan;
+    display: flex;
+    justify-content: space-evenly;
+}

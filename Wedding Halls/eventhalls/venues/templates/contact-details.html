@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method=POST>
+    {% csrf_token %}
+
+    <table>
+    <h2>General Venue Contact Information</h2>
+    {{GeneralContactForm}}
+    </table>
+    <br>
+
+    <table>
+    <h2>Event Day Person Contact Information</h2>
+    {{EventDayContactForm}}
+    </table>
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock %}

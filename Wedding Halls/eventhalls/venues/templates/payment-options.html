@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method=POST>
+    {% csrf_token %}
+
+    <table>
+        {{PaymentMethodForm}}
+        {{PaymentPlanForm}}
+
+    </table>
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock %}

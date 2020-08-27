@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method=POST>
+    {% csrf_token %}
+
+    <h2>Decorations</h2>
+    <table>
+        {{DecorationForm}}
+    </table>
+    <br>
+
+    <h2>Centerpieces</h2>
+    <table>
+        {{CenterPieceForm}}
+    </table>
+    <br>
+
+    <h2>Floral Arrangements</h2>
+    <table>
+        {{FlowerForm}}
+    </table>
+
+    <button type="submit">Submit</button>
+</form>
+    
+    {% endblock %}able>
+

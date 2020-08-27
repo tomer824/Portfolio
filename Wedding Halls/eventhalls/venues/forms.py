@@ -1,5 +1,5 @@
 from django import forms
-from .models import VenueDetail, DanceFloor, Tasting, Rehearsal, Decoration, ArrivalSetUp, Pricing, CenterPiece, Limitation, DrinkOption
+from .models import *
 
 class VenueDetailForm(forms.ModelForm):
     class Meta:
@@ -44,6 +44,10 @@ class RehearsalForm(forms.ModelForm):
     class Meta:
         model = Rehearsal
         fields = ['rehearsal_ceremonies', 'rehearsal_dinners', 'rehearsal_dinner_cost', 'rehearsal_ceremony_cost']
+        widgets = {
+            'rehearsal_ceremonies' : forms.RadioSelect,
+            'rehearsal_dinners' : forms.RadioSelect
+        }
         labels = {
             'rehearsal_ceremonies' : 'Rehearsal Ceremony Option',
             'rehearsal_ceremony_cost' : 'Rehearsal Ceremony Cost',
@@ -95,10 +99,153 @@ class DrinkOptionForm(forms.ModelForm):
             'wine_only' : 'Wine Only',
             'beer_only' : 'Beer Only'
         }
-    
+
+class OutdoorOptionsForm(forms.ModelForm):
+    class Meta: 
+        model = OutdoorOptions
+        fields = ['outdoor_reception', 'outdoor_ceremony', 'outdoor_dancing']
+        labels = {
+            'outdoor_reception' : 'Outdoor Reception Option',
+            'outdoor_ceremony' : 'Outdoor Ceremony Option',
+            'outdoor_dancing' : 'Outdoor Dance Floor Option'
+        }
+
+class IndoorOptionsForm(forms.ModelForm):
+    class Meta: 
+        model = IndoorOptions
+        fields = ['indoor_reception', 'indoor_ceremony', 'indoor_dancing']
+        labels = {
+            'indoor_reception' : 'Indoor Reception Option',
+            'indoor_ceremony' : 'Indoor Ceremony Option',
+            'indoor_dancing' : 'Indoor Dance Floor Option'
+        }
+
+class OvernightForm(forms.ModelForm):
+    class Meta:
+        model = Overnight
+        fields = ['hotel_partners', 'room_costs', 'bulk_rooms_discount']
+        labels = {
+           'hotel_partners' : 'Hotel Partners',
+           'room_costs' : 'Room Costs',
+           'bulk_rooms_discount' : 'Bulk Rooms Discount' 
+        }
+
+class ParkingForm(forms.ModelForm):
+    class Meta:
+        model = Parking
+        fields = ['onsite_parking', 'car_max', 'valet', 'parking_cost']
+        labels = {
+            'onsite_parking' : 'Onsite Parking Available',
+            'car_max' : 'Max No. of Cars in Parking Lot',
+            'valet' : 'Valet Option',
+            'parking_cost' : 'Cost of Parking / Valet'
+        }
+
+class AdditionalInformationForm(forms.ModelForm):
+    class Meta:
+        model = AdditionalInformation
+        fields = ['candles', 'sparklers', 'indoor_smoking', 'designated_smoking_area', 'secure_room',
+        'people_per_table', 'provide_booster_seats', 'provide_place_cards', 'ceremony_reception_seperate_rooms',
+        'ceremony_seating_provided',]
+        labels = {
+            'candles' : 'Are candles allowed to be used',
+            'sparklers' : 'Are sparklers allowed to be used',
+            'indoor_smoking' : 'Is indoor smoking permitted',
+            'designated_smoking_area' : 'Is there a designated smoking area',
+            'secure_room' : 'Is there a secure room for gifts and storage',
+            'people_per_table' : 'Average number of people seated per table',
+            'provide_booster_seats' : 'Do you provide booster seats or other childrens seats',
+            'provide_place_cards' : 'Do you provide place cards',
+            'ceremony_reception_seperate_rooms' : 'Are the ceremony and reception held in separate rooms',
+            'ceremony_seating_provided' : 'Do you provide seating for the ceremony',
+            'tip_included' : 'Is the tip for the staff included in the price',
+            'coat_room' : 'Do you have a coat room',
+            'wheelchair_accesible' : 'Is the venue wheelchair accessible',
+            'other_notes' : 'Other notes or comments'
+        }
+
+
+class StaffForm(forms.ModelForm):
+    class Meta:
+        model = Staff
+        fields = ['number_of_guests', 'number_of_waiters', 'number_of_bartenders', 'number_of_other_staff']
+        labels = {
+            'number_of_guests' : 'Number of Guests', 
+            'number_of_waiters' : 'Number of Waiters',
+            'number_of_bartenders' : 'Number of Bartenders',
+            'number_of_other_staff' : 'Number of Other Staff'
+        }
+
+
+class PaymentMethodForm(forms.ModelForm):
+    class Meta:
+        model = PaymentMethod
+        fields = ['accept_check', 'accept_credit_card', 'wire_transfer', 'cash_only']
+        labels = {
+            'accept_check' : 'Accept Payment By Check',
+            'accept_credit_card' : 'Accept Payment By Credit Card',
+            'wire_transfer' : 'Accept Payment By Wire Transfer',
+            'cash_only' : 'Accept Cash Only'
+        }
+
+class PaymentPlanForm(forms.ModelForm):
+    class Meta:
+        model = PaymentPlan
+        fields = ['months', 'last_payment_deadline']
+        labels = {
+            'payment_plan_option' : 'Payment Plan Option Offered',
+            'months' : 'Payment Plan Spread Over How Many Months',
+            'last_payment_deadline' : 'Last Payment Due By'
+        }
+
+class EventDayContactForm(forms.ModelForm):
+    class Meta:
+        model = EventDayContact
+        fields = ['name', 'phone', 'email']
+        labels = {
+            'name' : 'Contact Name',
+            'phone'  : 'Cell Phone Number',
+            'email' : 'Email'
+        }
+
+class GeneralContactForm(forms.ModelForm):
+    class Meta:
+        model = GeneralContact
+        fields = ['contact_person', 'phone', 'email']
+        labels = {
+            'contact_person' : 'Name of Primary Contact',
+            'phone' : 'General Phone Number',
+            'email' : 'General Email Address'
+        }
+
+class FlowerForm(forms.ModelForm):
+    class Meta:
+        model = Flower
+        fields = ['basic_florist_pricing', 'custom_floral_design', 'custom_floral_pricing', 'outside_florist']
+        labels = {
+            'basic_florist_pricing' : 'Cost of Basic In House Floral Arrangements',
+            'custom_floral_design' : 'Custom Floral Arrangements Offered',
+            'custom_floral_pricing' : 'Average Cost of Custom Floral Arrangements',
+            'outside_florist' : 'Outside Floral Arrangements Permitted'
+        }
+
+class VenueImageForm(forms.ModelForm):
+    class Meta:
+        model = VenueImage
+        fields = ['image']
+        labels = {
+            'image' : 'Upload Picture'
+        }
+
 class PricingForm(forms.ModelForm):
     class Meta:
         model = Pricing
         fields = ['amount_of_people', 'cost']
+        labels = {
+            'amount_of_people' : 'Number of Guests',
+            'cost' : 'Cost'
+        }
     
 PricingFormSet = forms.formset_factory(PricingForm, extra=1)
+
+

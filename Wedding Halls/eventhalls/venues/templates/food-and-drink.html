@@ -21,7 +21,7 @@
         </h2>
       </div>
       <div id="collapse{{forloop.counter}}" class="collapse show" aria-labelledby="heading{{forloop.counter}}" data-parent="#accordionExample">
-        <div class="card-body">
+        <div class="card-body add-new-row">
           {% for form2 in formset %}
           <div class="row form-row spacer">
             {% for field in form2%}
@@ -34,7 +34,7 @@
                     {{field}}
                     {% if field.label == 'Cost'%}
                     <div class="input-group-append">
-                        <button class="btn btn-success add-form-row">+</button>
+                        <button class="btn btn-success add-form-row" onclick="create_row(event)">+</button>
                     </div>
                     {% endif %}
                 </div>
@@ -57,7 +57,24 @@
 <button type="submit">Submit</button>
 
 </form>
-<script type='text/javascript'>
+
+<script>
+
+function create_row(event){
+  event.preventDefault()
+  console.log('this is working')
+  let new_row = document.querySelector('.add-new-row')
+  console.log(new_row)
+  let new_input = document.createElement('input')
+  let new_input2 = document.createElement('input')
+  new_row.appendChild(new_input)
+  new_row.appendChild(new_input2)
+}
+
+</script>
+
+{% comment %}
+<!-- <script type='text/javascript'>
     function updateElementIndex(el, prefix, ndx) {
         var id_regex = new RegExp('(' + prefix + '-\\d+)');
         var replacement = prefix + '-' + ndx;
@@ -114,5 +131,6 @@
         deleteForm('form', $(this));
         return false;
     });
-    </script>
+    </script> -->
+{% endcomment %}
 {% endblock %}

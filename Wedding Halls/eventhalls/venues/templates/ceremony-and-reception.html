@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method=POST>
+{% csrf_token %}
+
+<h2>Ceremony and Reception Options</h2>
+
+<form method=POST>
+    {% csrf_token %}
+    
+    <table>
+        {{IndoorOptionsForm}}
+        {{OutdoorOptionsForm}}
+    </table>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

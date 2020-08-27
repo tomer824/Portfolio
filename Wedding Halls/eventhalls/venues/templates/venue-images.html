@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+{{VenueImageForm}}
+
+<button type="submit">Submit</button>
+</form>
+
+{% for image in request.user.venue.venueimage_set.all %}
+<img src="{{ image.image.url }}" alt='imagebroken'>
+{% endfor %}
+
+
+{% endblock %}

@@ -7,14 +7,13 @@ Below you can set the details for {{Venue.hall_name}}<br>
 <a href="{% url 'venues:general-information' %}">General Information</a><br>
 <a href="{% url 'venues:prewedding-prep' %}">Pre-Wedding Preparation</a><br>
 <a href="{% url 'venues:food_and_drink' %}">Food and Drink Options</a><br>
-<a href="#">Ceremony and Reception</a><br>
-<a href="#">Staffing Options</a><br>
-<a href="#">Accomodations and Parking</a><br>
-<a href="#">Venue Limitations</a><br>
-<a href="#">Additional Information</a><br>
-<a href="#">Payment Options and Details</a><br>
-<a href="#">Venue Pictures</a><br>
-<a href="#">Wedding Day Contact Person</a><br>
-<a href="#">General Contact Information</a><br>
+<a href="{% url 'venues:ceremony_and_reception' %}">Ceremony and Reception</a><br>
+<a href="{% url 'venues:decorations' %}">Decorations and Floral Arrangements</a><br>
+<a href="{% url 'venues:staffing' %}">Staffing Options</a><br>
+<a href="{% url 'venues:accommodations_and_parking' %}">Accommodations and Parking</a><br>
+<a href="{% url 'venues:additional-information' %}">Additional Information</a><br>
+<a href="{% url 'venues:payment-options' %}">Payment Options and Details</a><br>
+<a href="{% url 'venues:venue-images' %}">Venue Pictures</a><br>
+<a href="{% url 'venues:contact-info' %}">Contact Information</a><br>
 
 {% endblock %}
