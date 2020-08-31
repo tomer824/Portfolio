@@ -144,6 +144,7 @@ class IndoorOptions(models.Model):
     indoor_reception = models.BooleanField(choices=BOOL_CHOICES)
     indoor_ceremony = models.BooleanField(choices=BOOL_CHOICES)
     indoor_dancing = models.BooleanField(choices=BOOL_CHOICES)
+    venue = models.OneToOneField(Venue, on_delete=models.CASCADE, related_name='indooroptions')
 
 class OutdoorOptions(models.Model):
     outdoor_reception = models.BooleanField(choices=BOOL_CHOICES)

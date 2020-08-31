@@ -44,10 +44,6 @@ class RehearsalForm(forms.ModelForm):
     class Meta:
         model = Rehearsal
         fields = ['rehearsal_ceremonies', 'rehearsal_dinners', 'rehearsal_dinner_cost', 'rehearsal_ceremony_cost']
-        widgets = {
-            'rehearsal_ceremonies' : forms.RadioSelect,
-            'rehearsal_dinners' : forms.RadioSelect
-        }
         labels = {
             'rehearsal_ceremonies' : 'Rehearsal Ceremony Option',
             'rehearsal_ceremony_cost' : 'Rehearsal Ceremony Cost',

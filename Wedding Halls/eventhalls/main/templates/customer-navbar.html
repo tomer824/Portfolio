@@ -30,8 +30,8 @@
             <a class="nav-link" href="{% url 'logout' %}">Logout <span class="sr-only">(current)</span></a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search by Venue or Zipcode" aria-label="Search">
+      <form method='POST' action='{% url "search" %}' class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" name="customer_search_bar" placeholder="Search by Venue or Zipcode" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
