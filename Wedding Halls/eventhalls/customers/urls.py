@@ -6,5 +6,6 @@ app_name = 'customers'
 
 urlpatterns = [
     path('', views.home, name='home'),
-    
+    path('search/', views.search_bar, name='search'),
+
 ]
