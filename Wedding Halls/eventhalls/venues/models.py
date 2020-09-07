@@ -6,13 +6,13 @@ BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
 
 class VenueDetail(models.Model):
     max_guests = models.IntegerField()
-    min_guests = models.IntegerField()
+    min_guests = models.IntegerField(null=True, blank=True)
     recommended_tip = models.IntegerField(null=True, blank=True)
     min_fee = models.IntegerField()
     outside_catering = models.BooleanField(choices=BOOL_CHOICES)
     venue_only_price = models.IntegerField(blank=True, null = True)
-    deposit_fee = models.IntegerField()
-    non_refundable_percent = models.IntegerField()
+    deposit_fee = models.IntegerField(null=True, blank=True)
+    non_refundable_percent = models.IntegerField(null=True, blank=True)
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE, related_name='venuedetail')
 
 class Kosher(models.Model):
@@ -34,12 +34,11 @@ class JewishWedding(models.Model):
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 
 class SeaFood(models.Model):
-    lobster = models.IntegerField()
-    crab = models.IntegerField()
-    shrimp = models.IntegerField()
-    oysters = models.IntegerField()
-    sea_food_package = models.IntegerField()
-    dietary = models.OneToOneField('DietaryOption', on_delete=models.CASCADE)
+    lobster = models.BooleanField()
+    crab = models.BooleanField()
+    shrimp = models.BooleanField()
+    oysters = models.BooleanField()
+    sea_food_package = models.BooleanField()
     pricing = models.ManyToManyField('Pricing')
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 
@@ -54,28 +53,17 @@ class DietaryOption(models.Model):
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 
 class FoodOption(models.Model):
-    meat_meal = models.IntegerField(null=True, blank=True)
-    lamb_meal = models.IntegerField(null=True, blank=True)
-    fish_meal = models.IntegerField(null=True, blank=True)
-    meat_and_chicken = models.IntegerField(null=True, blank=True)
-    meat_and_fish = models.IntegerField(null=True, blank=True)
-    chicken_and_fish = models.IntegerField(null=True, blank=True)
-    vegitarian = models.IntegerField(null=True, blank=True)
-    vegan = models.IntegerField(null=True, blank=True)
+    MEAL_CHOICES = ((True, 'Sit Down'), (False, 'Buffet'))
+    meal_option = models.BooleanField(choices=MEAL_CHOICES)
+    name_of_food = models.CharField(max_length=50)
+    description_of_food = models.CharField(max_length=250)
     pricing = models.ManyToManyField('Pricing')
-    venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
     
 class DrinkOption(models.Model):
-    full_open_bar = models.ManyToManyField('Pricing', related_name='full_open_bar', null=True, blank=True)
-    bottom_shelf = models.ManyToManyField('Pricing', related_name='bottom_shelf', null=True, blank=True)
-    wine_and_beer = models.ManyToManyField('Pricing', related_name='wine_and_beer', null=True, blank=True)
-    wine_only = models.ManyToManyField('Pricing', related_name='wine_only', null=True, blank=True)
-    beer_only = models.ManyToManyField('Pricing', related_name='beer_only', null=True, blank=True)
-    venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
-
-class MealOption(models.Model):
-    buffet = models.BooleanField(choices=BOOL_CHOICES)
-    sitdown = models.BooleanField(choices=BOOL_CHOICES)
+    DRINK_CHOICES = (('full_open_bar','Full Open Bar'), ('bottom_shelf', 'Bottom Shelf Only'),
+    ('wine_and_beer','Wine and Beer'), ('wine_only','Wine Only'), ('beer_only','Beer Only'))
+    drink_options = models.CharField(max_length=30, choices=DRINK_CHOICES,)
     pricing = models.ManyToManyField('Pricing')
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 
@@ -135,7 +123,7 @@ class PaymentMethod(models.Model):
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 
 class PaymentPlan(models.Model):
-    payment_plan_option = models.BooleanField(choices=BOOL_CHOICES)
+    payment_plan_option = models.BooleanField(choices=BOOL_CHOICES, null=True, blank=True)
     months = models.IntegerField(null=True, blank=True)
     last_payment_deadline = models.CharField(max_length=50, null=True, blank=True)
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
@@ -209,8 +197,8 @@ class Decoration(models.Model):
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 
 class ArrivalSetUp(models.Model):
-    hours_preevent_setup = models.IntegerField()
-    hours_preevent_arrival = models.IntegerField()
+    hours_preevent_setup = models.IntegerField(null=True, blank=True)
+    hours_preevent_arrival = models.IntegerField(null=True, blank=True)
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 
 class EventDayContact(models.Model):
@@ -235,15 +223,15 @@ class AdditionalInformation(models.Model):
     indoor_smoking = models.BooleanField(choices=BOOL_CHOICES)
     designated_smoking_area = models.BooleanField(choices=BOOL_CHOICES)
     secure_room = models.BooleanField(choices=BOOL_CHOICES)
-    people_per_table = models.IntegerField()
+    people_per_table = models.IntegerField(null=True, blank=True)
     provide_booster_seats = models.BooleanField(choices=BOOL_CHOICES)
     provide_place_cards = models.BooleanField(choices=BOOL_CHOICES)
     ceremony_reception_seperate_rooms = models.BooleanField(choices=BOOL_CHOICES)
     ceremony_seating_provided = models.BooleanField(choices=BOOL_CHOICES)
-    tip_included = models.BooleanField(choices=BOOL_CHOICES)
+    tip_included = models.BooleanField(choices=BOOL_CHOICES, null=True, blank=True)
     coat_room = models.BooleanField(choices=BOOL_CHOICES)
     wheelchair_accessible = models.BooleanField(choices=BOOL_CHOICES)
-    other_notes = models.TextField()
+    other_notes = models.TextField(null=True, blank=True)
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 
 class Pricing(models.Model):

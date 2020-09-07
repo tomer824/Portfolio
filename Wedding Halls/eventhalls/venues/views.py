@@ -17,6 +17,14 @@ def general_information(request):
     venue_detail_form = VenueDetailForm(request.POST or None)
     dance_floor_form = DanceFloorForm(request.POST or None)
     venue_detail_form_2 = VenueDetailForm2(request.POST or None)
+    forms = [venue_detail_form, dance_floor_form, venue_detail_form_2]
+    if request.method=='POST':
+        if venue_detail_form.is_valid() and dance_floor_form.is_valid() and venue_detail_form_2.is_valid():
+            for form in forms:
+                obj = form.save(commit=False)
+                obj.venue = request.user.venue
+                obj.save()
+            return redirect('venues:venues_home')
     return render(request, 'general-information.html', {'VenueDetailForm':venue_detail_form, 
     'DanceFloorForm':dance_floor_form, 'VenueDetailForm2' : venue_detail_form_2})
 
@@ -30,6 +38,14 @@ def edit_general_information(request):
     venue_detail_form = VenueDetailForm(request.POST or None, instance=request.user.venue.venuedetail)
     dance_floor_form = DanceFloorForm(request.POST or None, instance=request.user.venue.dancefloor)
     venue_detail_form_2 = VenueDetailForm2(request.POST or None, instance=request.user.venue.venuedetail)
+    forms = [venue_detail_form, dance_floor_form, venue_detail_form_2]
+    if request.method=='POST':
+        if venue_detail_form.is_valid() and dance_floor_form.is_valid() and venue_detail_form_2.is_valid():
+            for form in forms:
+                obj = form.save(commit=False)
+                obj.venue = request.user.venue
+                obj.save()
+            return redirect('venues:venues_home')
     return render(request, 'general-information.html', {'VenueDetailForm':venue_detail_form, 
     'DanceFloorForm':dance_floor_form, 'VenueDetailForm2' : venue_detail_form_2})
 
@@ -45,11 +61,12 @@ def prewedding_prep(request):
     arrival_setup_form = ArrivalSetUpForm(request.POST or None)
     forms = [tasting_form, rehearsal_form, arrival_setup_form]
     if request.method == 'POST':
-        for form in forms:
-            if form.is_valid():
+        if tasting_form.is_valid() and rehearsal_form.is_valid() and arrival_setup_form.is_valid():
+            for form in forms:
                 obj = form.save(commit=False)
                 obj.venue = request.user.venue
                 obj.save()
+            return redirect('venues:venues_home')
     return render(request, 'prewedding-preparation.html', {'TastingForm' : tasting_form,
     'RehearsalForm': rehearsal_form, 'ArrivalSetUpForm' : arrival_setup_form})
 
@@ -65,11 +82,12 @@ def edit_prewedding_prep(request):
     arrival_setup_form = ArrivalSetUpForm(request.POST or None, instance=request.user.venue.arrivalsetup)
     forms = [tasting_form, rehearsal_form, arrival_setup_form]
     if request.method == 'POST':
-        for form in forms:
-            if form.is_valid():
+        if tasting_form.is_valid() and rehearsal_form.is_valid() and arrival_setup_form.is_valid():
+            for form in forms:
                 obj = form.save(commit=False)
                 obj.venue = request.user.venue
                 obj.save()
+            return redirect('venues:venues_home')
     return render(request, 'prewedding-preparation.html', {'TastingForm' : tasting_form,
     'RehearsalForm': rehearsal_form, 'ArrivalSetUpForm' : arrival_setup_form})
 
@@ -85,12 +103,12 @@ def decorations(request):
     flower_form = FlowerForm(request.POST or None)
     forms = [decoration_form, centerpiece_form, flower_form]
     if request.method == 'POST':
-        for form in forms:
-            if form.is_valid():
+        if decoration_form.is_valid() and centerpiece_form.is_valid() and flower_form.is_valid():
+            for form in forms:
                 obj = form.save(commit=False)
                 obj.venue = request.user.venue
                 obj.save()
-
+            return redirect('venues:venues_home')
     return render(request, 'decorations.html', {'DecorationForm':decoration_form, 'CenterPieceForm' : centerpiece_form,
     'FlowerForm' : flower_form})
 
@@ -106,12 +124,12 @@ def edit_decorations(request):
     flower_form = FlowerForm(request.POST or None, instance=request.user.venue.flower)
     forms = [decoration_form, centerpiece_form, flower_form]
     if request.method == 'POST':
-        for form in forms:
-            if form.is_valid():
+        if decoration_form.is_valid() and centerpiece_form.is_valid() and flower_form.is_valid():
+            for form in forms:
                 obj = form.save(commit=False)
                 obj.venue = request.user.venue
                 obj.save()
-
+            return redirect('venues:venues_home')
     return render(request, 'decorations.html', {'DecorationForm':decoration_form, 'CenterPieceForm' : centerpiece_form,
     'FlowerForm' : flower_form})
 
@@ -125,6 +143,7 @@ def additional_information(request):
             obj = additional_information.save(commit=False)
             obj.venue = request.user.venue
             obj.save()
+        return redirect('venues:venues_home')
     return render(request, 'additional-information.html', {'AdditionalInformationForm' : additional_information})
 
 @login_required
@@ -137,7 +156,35 @@ def edit_additional_information(request):
             obj = additional_information.save(commit=False)
             obj.venue = request.user.venue
             obj.save()
+        return redirect('venues:venues_home')
     return render(request, 'additional-information.html', {'AdditionalInformationForm' : additional_information})
+
+@login_required
+def dietary_options(request):
+    if DietaryOption.objects.filter(venue=request.user.venue).exists():
+        return redirect('venues:edit-dietary-options')
+    dietary_option_form = DietaryOptionForm(request.POST or None)
+    if request.method == 'POST':
+        if dietary_option_form.is_valid():
+            obj = dietary_option_form.save(commit=False)
+            obj.venue = request.user.venue
+            obj.save()
+        return redirect('venues:venues_home')
+    return render(request, 'dietary-option.html', {'DietaryOptionForm' : dietary_option_form})
+
+@login_required
+def edit_dietary_options(request):
+    if not DietaryOption.objects.filter(venue=request.user.venue).exists():
+        return redirect('venues:dietary-options')
+    dietary_option_form = DietaryOptionForm(request.POST or None, instance=request.user.venue.dietaryoption)
+    if request.method == 'POST':
+        if dietary_option_form.is_valid():
+            obj = dietary_option_form.save(commit=False)
+            obj.venue = request.user.venue
+            obj.save()
+        return redirect('venues:venues_home')
+    return render(request, 'dietary-option.html', {'DietaryOptionForm' : dietary_option_form})
+
 
 @login_required
 def venue_images(request):
@@ -158,49 +205,50 @@ def delete_image(request, id):
     return redirect('venues:venue-images')
 
 @login_required
-def food_and_drink(request):
-    if DrinkOption.objects.filter(venue=request.user.venue).exists():
-        return redirect('venues:edit-food-and-drink')
+def add_drink_options(request):
     drink_option_form = DrinkOptionForm(request.POST or None)
-    formsets = []
-    for prefix in ['full_open_bar','bottom_shelf', 'wine_and_beer', 'wine_only', 'beer_only']:
-        formset = PricingFormSet(prefix=prefix)
-        formsets.append(formset)
-    form_formsets = zip(drink_option_form, formsets)
-    if request.method == 'POST':
-        drink_option, created = DrinkOption.objects.get_or_create(venue=request.user.venue)
-        for prefix in ['full_open_bar','bottom_shelf', 'wine_and_beer', 'wine_only', 'beer_only']:
-            formset = PricingFormSet(request.POST, prefix=prefix)
-            if formset.is_valid():
-                for form in formset:
-                    pricing = form.save(commit=False)
-                    pricing.venue = request.user.venue
-                    pricing.save()
-                    getattr(drink_option, prefix).add(pricing)
-    return render(request, 'food-and-drink.html', {'form_formsets': form_formsets})
+    pricing_formset = PricingFormSet(request.POST or None)
+    if request.method=='POST':
+        if drink_option_form.is_valid() and pricing_formset.is_valid():
+            drink_option = drink_option_form.save(commit=False)
+            drink_option.venue = request.user.venue
+            drink_option.save()
+            for form in pricing_formset:
+                pricing = form.save(commit=False)
+                pricing.venue = request.user.venue
+                pricing.save()
+                drink_option.pricing.add(pricing)
+        return redirect('venues:venues_home')
+    return render(request, 'drink-options.html', {'DrinkOptionForm' : drink_option_form, 'formset' : pricing_formset})
 
 @login_required
-def edit_food_and_drink(request):
-    if not DrinkOption.objects.filter(venue=request.user.venue).exists():
-        return redirect('venues:food-and-drink')
-    drink_option_form = DrinkOptionForm(request.POST or None, instance=request.user.venue.drinkoption)
-    formsets = []
-    for prefix in ['full_open_bar','bottom_shelf', 'wine_and_beer', 'wine_only', 'beer_only']:
-        formset = PricingFormSet(prefix=prefix)
-        formsets.append(formset)
-    form_formsets = zip(drink_option_form, formsets)
-    if request.method == 'POST':
-        drink_option, created = DrinkOption.objects.get_or_create(venue=request.user.venue)
-        for prefix in ['full_open_bar','bottom_shelf', 'wine_and_beer', 'wine_only', 'beer_only']:
-            formset = PricingFormSet(request.POST, prefix=prefix)
-            if formset.is_valid():
-                for form in formset:
-                    pricing = form.save(commit=False)
-                    pricing.venue = request.user.venue
-                    pricing.save()
-                    getattr(drink_option, prefix).add(pricing)
-    return render(request, 'food-and-drink.html', {'form_formsets': form_formsets})
+def add_food_option(request):
+    food_option_form = FoodOptionForm(request.POST or None)
+    pricing_formset = PricingFormSet(request.POST or None)
+    if request.method=='POST':
+        if food_option_form.is_valid() and pricing_formset.is_valid():
+            food_option = food_option_form.save(commit=False)
+            food_option.venue = request.user.venue
+            food_option.save()
+            for form in pricing_formset:
+                pricing = form.save(commit=False)
+                pricing.venue = request.user.venue
+                pricing.save()
+                food_option.pricing.add(pricing)
+        return redirect('venues:venues_home')
+    return render(request, 'menu-options.html', {'FoodOptionForm' : food_option_form, 'formset' : pricing_formset})
 
+@login_required
+def food_and_drink(request):
+    return render(request, 'food-and-drink.html')
+
+@login_required
+def show_drink_pricing(request):
+    return render(request, 'current-drink-pricing.html')
+
+@login_required
+def show_food_pricing(request):
+    return render(request, 'current-menu-pricing.html')
 
 @login_required
 def ceremony_and_reception(request):
@@ -212,11 +260,12 @@ def ceremony_and_reception(request):
     outdoor_options_form = OutdoorOptionsForm(request.POST or None)
     forms = [indoor_options_form, outdoor_options_form]
     if request.method == 'POST':
-        for form in forms:
-            if form.is_valid():
+        if indoor_options_form.is_valid() and outdoor_options_form.is_valid():
+            for form in forms:
                 obj = form.save(commit=False)
                 obj.venue = request.user.venue
                 obj.save()
+            return redirect('venues:venues_home')
     return render(request, 'ceremony-and-reception.html', {'IndoorOptionsForm':indoor_options_form, 'OutdoorOptionsForm' : outdoor_options_form})
 
 @login_required
@@ -229,11 +278,12 @@ def edit_ceremony_and_reception(request):
     outdoor_options_form = OutdoorOptionsForm(request.POST or None, instance=request.user.venue.outdooroptions)
     forms = [indoor_options_form, outdoor_options_form]
     if request.method == 'POST':
-        for form in forms:
-            if form.is_valid():
+        if indoor_options_form.is_valid() and outdoor_options_form.is_valid():
+            for form in forms:
                 obj = form.save(commit=False)
                 obj.venue = request.user.venue
                 obj.save()
+            return redirect('venues:venues_home')
     return render(request, 'ceremony-and-reception.html', {'IndoorOptionsForm':indoor_options_form, 'OutdoorOptionsForm' : outdoor_options_form})
 
 
@@ -244,9 +294,10 @@ def staffing(request):
     staff_form = StaffForm(request.POST or None)
     if request.method == 'POST':
         if staff_form.is_valid():
-            obj = staff.save(commit=False)
+            obj = staff_form.save(commit=False)
             obj.venue = request.user.venue
             obj.save()
+        return redirect('venues:venues_home')
     return render(request, 'staffing-options.html', {'StaffForm' : staff_form})
 
 @login_required
@@ -256,9 +307,10 @@ def edit_staffing(request):
     staff_form = StaffForm(request.POST or None, instance=request.user.venue.staff)
     if request.method == 'POST':
         if staff_form.is_valid():
-            obj = staff.save(commit=False)
+            obj = staff_form.save(commit=False)
             obj.venue = request.user.venue
             obj.save()
+        return redirect('venues:venues_home')
     return render(request, 'staffing-options.html', {'StaffForm' : staff_form})
 
 @login_required
@@ -268,14 +320,15 @@ def accommodations_and_parking(request):
     if linked_overnight and linked_parking:
         return redirect('venues:edit-accommodations-and-parking')
     overnight_form = OvernightForm(request.POST or None)
-    parking_form = ParkingForm
+    parking_form = ParkingForm(request.POST or None)
     forms = [overnight_form, parking_form]
     if request.method == 'POST':
-        for form in forms:
-            if form.is_valid():
+        if overnight_form.is_valid() and parking_form.is_valid():
+            for form in forms:
                 obj = form.save(commit=False)
                 obj.venue = request.user.venue
                 obj.save()
+            return redirect('venues:venues_home')
     return render(request, 'accommodations-and-parking.html', {'OvernightForm' : overnight_form, 'ParkingForm' : parking_form})
 
 @login_required
@@ -288,11 +341,12 @@ def edit_accommodations_and_parking(request):
     parking_form = ParkingForm(request.POST or None, instance=request.user.venue.parking)
     forms = [overnight_form, parking_form]
     if request.method == 'POST':
-        for form in forms:
-            if form.is_valid():
+        if overnight_form.is_valid() and parking_form.is_valid():
+            for form in forms:
                 obj = form.save(commit=False)
                 obj.venue = request.user.venue
                 obj.save()
+            return redirect('venues:venues_home')
     return render(request, 'accommodations-and-parking.html', {'OvernightForm' : overnight_form, 'ParkingForm' : parking_form})
 
 
@@ -306,11 +360,12 @@ def payment_options(request):
     payment_method_form = PaymentMethodForm(request.POST or None)
     forms = [payment_plan_form, payment_method_form]
     if request.method == 'POST':
-        for form in forms:
-            if form.is_valid():
+        if payment_plan_form.is_valid() and payment_method_form.is_valid():
+            for form in forms:
                 obj = form.save(commit=False)
                 obj.venue = request.user.venue
                 obj.save()
+            return redirect('venues:venues_home')
     return render(request, 'payment-options.html', {'PaymentPlanForm' : payment_plan_form, 'PaymentMethodForm' : payment_method_form})
 
 @login_required
@@ -323,11 +378,12 @@ def edit_payment_options(request):
     payment_method_form = PaymentMethodForm(request.POST or None, instance=request.user.venue.paymentmethod)
     forms = [payment_plan_form, payment_method_form]
     if request.method == 'POST':
-        for form in forms:
-            if form.is_valid():
+        if payment_plan_form.is_valid() and payment_method_form.is_valid():
+            for form in forms:
                 obj = form.save(commit=False)
                 obj.venue = request.user.venue
                 obj.save()
+            return redirect('venues:venues_home')
     return render(request, 'payment-options.html', {'PaymentPlanForm' : payment_plan_form, 'PaymentMethodForm' : payment_method_form})
 
 
@@ -341,11 +397,12 @@ def contact_info(request):
     event_day_contact_form = EventDayContactForm(request.POST or None)
     forms = [general_contact_form, event_day_contact_form]
     if request.method == 'POST':
-        for form in forms:
-            if form.is_valid():
+        if general_contact_form.is_valid() and event_day_contact_form.is_valid():
+            for form in forms:
                 obj = form.save(commit=False)
                 obj.venue = request.user.venue
                 obj.save()
+            return redirect('venues:venues_home')
     return render(request, 'contact-details.html', {'GeneralContactForm': general_contact_form, 'EventDayContactForm': event_day_contact_form})
 
 @login_required
@@ -356,11 +413,12 @@ def edit_contact_info(request):
         return redirect('venues:contact-info')
     general_contact_form = GeneralContactForm(request.POST or None, instance=request.user.venue.generalcontact)
     event_day_contact_form = EventDayContactForm(request.POST or None, instance=request.user.venue.eventdaycontact)
-    forms = [general_contact_form, event_day_form]
+    forms = [general_contact_form, event_day_contact_form]
     if request.method == 'POST':
-        for form in forms:
-            if form.is_valid():
+        if general_contact_form.is_valid() and event_day_contact_form.is_valid():
+            for form in forms:
                 obj = form.save(commit=False)
                 obj.venue = request.user.venue
                 obj.save()
+            return redirect('venues:venues_home')
     return render(request, 'contact-details.html', {'GeneralContactForm': general_contact_form, 'EventDayContactForm': event_day_contact_form})

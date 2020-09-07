@@ -2,20 +2,19 @@
 
 {% block content %}
 
-<div class="jumbotron"'>
+<div class="jumbotron"' style="background-image: url(https://blushbanquethall.com/wp-content/uploads/2018/06/wedding-venue-decoration.jpg); width=100%;">
     <h1 class="display-4" style="text-align: center;">The Perfect Wedding Starts With The Perfect Venue!</h1>
     <p class="lead" style="text-align: center;">Start your search below.</p>
     <hr class="my-4">
     
     <form method="GET">
       {% csrf_token %}
+      <div class="container">
       <div class='row'>
-        {% for field in filter.form %}
-          <div class='col-2.5' style='padding: 5px'>
-            {{field.label_tag}}
-            {{field}}
-          </div>
-        {% endfor %}
+        <div class='col'>{{filter.form.max_guests.label_tag}} {{filter.form.max_guests}}</div>
+        <div class='col'>{{filter.form.city.label_tag}} {{filter.form.city}}</div>
+        <div class='col'>{{filter.form.zipcode.label_tag}} {{filter.form.zipcode}}</div>
+        </div>
       </div>
   {% for obj in filter.qs %}
       {{ obj.hall_name }} - ${{ obj.price }}<br />
@@ -27,7 +26,15 @@
   </p>
   <div class="collapse" id="collapseExample">
     <div class="card card-body">
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+      <div class="container">
+        <div class='row'>
+          <div class='col'>{{filter.form.outside_catering.label_tag}} {{filter.form.outside_catering}}</div>
+          <div class='col'>{{filter.form.outdoor_ceremony.label_tag}} {{filter.form.outdoor_ceremony}}</div>
+          <div class='col'>{{filter.form.onsite_parking.label_tag}} {{filter.form.onsite_parking}}</div>
+          <div class='col'>{{filter.form.valet.label_tag}} {{filter.form.valet}}</div>
+          <div class='col'>{{filter.form.smoking_area.label_tag}} {{filter.form.smoking_area}}</div>
+          </div>
+        </div>
     </div>
   </div>
 
@@ -35,6 +42,6 @@
       <button type='submit' class="btn btn-primary btn-lg" role="button" style="margin-left: 48%;">Search</button>
     </p>
   </form>
-  </div>
+</div>
 
 {% endblock %}

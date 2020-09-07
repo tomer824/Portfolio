@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="text-align: center;">
+    
+<h3>Current Menu Pricing Options</h3>
+<a href="{% url 'venues:food-option' %}">Set Menu Pricing</a><br>
+
+
+{% for foodoption in request.user.venue.foodoption_set.all %}
+    <h1>{{foodoption.name_of_food}}</h1>
+    <h1>{{foodoption.description_of_food}}</h1>
+    {% for pricing in foodoption.pricing.all %}
+       <p> Number of Guests{{pricing.amount_of_people}} Cost {{pricing.cost}} </p>
+    {% endfor %}
+{% endfor %}
+
+</div>
+
+<br>
+<br>
+<div style="text-align: center;">
+<a href="{% url 'venues:food-and-drink' %}">Go Back</a>
+</div>
+{% endblock %}

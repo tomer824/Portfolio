@@ -7,3 +7,6 @@ def main(request):
         return redirect('router')   
     else:
         return render(request, 'main.html')
+
+def contact_us(request):
+    return render(request, 'contact-us.html')

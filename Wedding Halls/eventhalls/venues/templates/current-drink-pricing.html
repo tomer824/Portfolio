@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="text-align: center;">
+        <h2>Prices for Full Open Bar</h2>
+        {% for pricing in request.user.venue.drinkoption.full_open_bar.all %}
+        Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
+        <br>
+        {% endfor %}
+        <br>
+
+        <h2>Prices for Bottom Shelf Open Bar</h2>
+        {% for pricing in request.user.venue.drinkoption.bottom_shelf.all %}
+        Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
+        <br>
+        {% endfor %}
+        <br>
+
+        <h2>Prices for Wine and Beer Only</h2>
+        {% for pricing in request.user.venue.drinkoption.wine_and_beer.all %}
+        Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
+        <br>
+        {% endfor %}
+        <br>
+
+        <h2>Prices for Wine Only</h2>
+        {% for pricing in request.user.venue.drinkoption.wine_only.all %}
+        Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
+        <br>
+        {% endfor %}
+        <br>
+
+        <h2>Prices for Beer Only</h2>
+        {% for pricing in request.user.venue.drinkoption.beer_only.all %}
+        Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
+        <br>
+    {% endfor %}
+        <br>
+        <a href="{% url 'venues:drink-options' %}">Set / Edit Venue Drink Pricing</a><br>
+</div>
+
+<br>
+
+<div style="text-align: center;">
+<a href="{% url 'venues:food-and-drink' %}">Go Back</a>
+</div>
+
+{% endblock %}

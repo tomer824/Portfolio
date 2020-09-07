@@ -14,5 +14,6 @@
 <a class="btn btn-danger btn-sm" href="{% url 'venues:delete-image' image.id %}">Delete</a>
 {% endfor %}
 
-
+<br>
+<a href="{% url 'venues:venues_home' %}">Go Back</a>
 {% endblock %}

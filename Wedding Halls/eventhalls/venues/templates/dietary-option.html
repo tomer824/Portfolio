@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h4>Dietary Options</h4>
+
+<form method=POST>
+    {% csrf_token %}
+        
+
+    <table>
+        {{DietaryOptionForm}}
+    </table>
+    
+    <button type="submit" style="width: 80px">Submit</button>
+
+</form>
+<br>
+    <a href="{% url 'venues:food-and-drink' %}">Go Back</a>
+
+{% endblock %}

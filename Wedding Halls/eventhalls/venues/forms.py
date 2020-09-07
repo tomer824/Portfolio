@@ -35,8 +35,9 @@ class VenueDetailForm2(forms.ModelForm):
 class TastingForm(forms.ModelForm):
     class Meta:
         model = Tasting
-        fields = ['tasting_price']
+        fields = ['tastings_offered', 'tasting_price']
         labels = {
+            'tastings_offered' : 'Tastings Option',
             'tasting_price' : 'Tasting Price'
         }
 
@@ -86,14 +87,9 @@ class ArrivalSetUpForm(forms.ModelForm):
 class DrinkOptionForm(forms.ModelForm):
     class Meta:
         model = DrinkOption
-        fields = ['full_open_bar', 'bottom_shelf', 'wine_and_beer', 'wine_only', 
-        'beer_only']
+        fields = ['drink_options']
         labels = {
-            'full_open_bar' : 'Full Open Bar',
-            'bottom_shelf' : 'Bottom Shelf Only',
-            'wine_and_beer' : 'Wine and Beer Only',
-            'wine_only' : 'Wine Only',
-            'beer_only' : 'Beer Only'
+            'drink_options' : 'Drink Options',
         }
 
 class OutdoorOptionsForm(forms.ModelForm):
@@ -142,7 +138,7 @@ class AdditionalInformationForm(forms.ModelForm):
         model = AdditionalInformation
         fields = ['candles', 'sparklers', 'indoor_smoking', 'designated_smoking_area', 'secure_room',
         'people_per_table', 'provide_booster_seats', 'provide_place_cards', 'ceremony_reception_seperate_rooms',
-        'ceremony_seating_provided',]
+        'ceremony_seating_provided', 'coat_room', 'wheelchair_accessible']
         labels = {
             'candles' : 'Are candles allowed to be used',
             'sparklers' : 'Are sparklers allowed to be used',
@@ -157,6 +153,8 @@ class AdditionalInformationForm(forms.ModelForm):
             'tip_included' : 'Is the tip for the staff included in the price',
             'coat_room' : 'Do you have a coat room',
             'wheelchair_accesible' : 'Is the venue wheelchair accessible',
+            'coat_room' : 'Coat Room',
+            'wheelchair_accessible' : 'Wheelchair Accessible',
             'other_notes' : 'Other notes or comments'
         }
 
@@ -224,6 +222,69 @@ class FlowerForm(forms.ModelForm):
             'custom_floral_pricing' : 'Average Cost of Custom Floral Arrangements',
             'outside_florist' : 'Outside Floral Arrangements Permitted'
         }
+
+class DietaryOptionForm(forms.ModelForm):
+    class Meta:
+        model = DietaryOption
+        fields = ['vegitarian', 'vegan', 'gluten_free', 'lactose_free', 'halal',
+        'kosheroption', 'sea_food']
+        labels = {
+            'vegitarian' : 'Vegitarian',
+            'vegan' : 'Vegan',
+            'gluten_free' : 'Gluten Free',
+            'lactose_free' : 'Lactose Free',
+            'halal' : 'Halal',
+            'kosheroption' : 'Kosher',
+            'sea_food' : 'Seafood'
+        }
+
+class FoodOptionForm(forms.ModelForm):
+    class Meta:
+        model = FoodOption
+        fields = ['meal_option', 'name_of_food', 'description_of_food']
+        labels = {
+            'meal_option' : 'Meal Option',
+            'name_of_food' : 'Menu Item Offered',
+            'description_of_food' : 'Description of Menu Item',
+        }
+
+class KosherForm(forms.ModelForm):
+    class Meta:
+        model = Kosher
+        fields = ['glatt', 'beit_yoseph', 'chalav_yisrael', 'kemach_yisrael', 'rabbinical_supervision']
+        labels = {
+                'glatt' : 'Glatt Kosher',
+                'beit_yoseph' : "Beit Yosef",
+                'chalav_yisrael' : 'Chalav Israel',
+                'kemach_yisrael' : 'Kemach Israel',
+                'rabbinical_supervision' : 'Rabbinal Supervision Under'
+            }
+
+class JewishWeddingForm(forms.ModelForm):
+    class Meta:
+        model = JewishWedding
+        fields = ['seperate_seating_option', 'seperate_dancing_option', 'ichud_room', 'bride_reception_room',
+        'groom_ketubah_room']
+        labels = {
+            'seperate_seating_option' : 'Separate Seating Available',
+            'seperate_dancing_option' : 'Separate Dancing Available',
+            'ichud_room' : 'Ichud Room Available',
+            'bride_reception_room' : 'Separate Bridal Reception Room',
+            'groom_ketubah_room' : 'Separate Groom Ketubah Room'
+        }   
+
+class SeaFoodForm(forms.ModelForm):
+    class Meta:
+        model = SeaFood
+        fields = ['lobster', 'crab', 'shrimp', 'oysters', 'sea_food_package']
+        labels = {
+            'lobster' : 'Lobster',
+            'crab' : 'Crab',
+            'shrimp' : 'Shrimp',
+            'oysters' : 'Oysters',
+            'sea_food_package' : 'Package Seafood Deal Offered'
+        }
+
 
 class VenueImageForm(forms.ModelForm):
     class Meta:
