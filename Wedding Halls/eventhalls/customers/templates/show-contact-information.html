@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="text-align: center;">{{venue.hall_name}}</h1>
+
+<div style="text-align: center;">
+
+<h3>General Contact Information</h3>
+Contact Name:&nbsp; {{venue.generalcontact.contact_person}}<br>
+Phone: &nbsp;{{venue.generalcontact.phone}}<br>
+Email: &nbsp;{{venue.generalcontact.email}}<br>
+
+<br>
+<a href="{% url 'customers:show-venue' venue.slug %}">Go Back</a><br>
+
+</div>
+{% endblock %}

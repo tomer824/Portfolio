@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="text-align: center;">{{venue.hall_name}}</h1>
+
+<div style="text-align: center;">
+    {% for drinkoption in venue.drinkoption_set.all %}
+    
+        <h2>Prices for {{drinkoption.get_drink_options_display}}</h2>
+        {% for pricing in drinkoption.pricing.all %}
+        Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
+        <br>
+        {% endfor %}
+        <br>
+    {% endfor %}
+
+
+<br>
+<a href="{% url 'customers:show-venue' venue.slug %}">Go Back</a><br>
+
+</div>
+{% endblock %}

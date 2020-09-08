@@ -1,6 +1,7 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -27,8 +28,11 @@ class Venue(models.Model):
     state = models.CharField(max_length=20, choices = CHOICES)
     zipcode = models.CharField(max_length=5)
     user = models.OneToOneField(User, on_delete = models.CASCADE)
+    slug = models.SlugField()
 
     def __str__(self):
         return self.hall_name
 
-
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.hall_name + str(self.id))
+        super(Venue, self).save(*args, **kwargs)

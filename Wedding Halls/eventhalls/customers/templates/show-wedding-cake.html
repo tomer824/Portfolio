@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="text-align: center;">{{venue.hall_name}}</h1>
+
+<div style="text-align: center;">
+
+    Venue Provides Wedding Cake:&nbsp; {{venue.weddingcake.provide_wedding_cake}}<br>
+
+    {% for cake in venue.weddingcake_set.all %}
+    
+        <h2>Cake Layers: &nbsp;{{cake.get_cake_option_display}}</h2>
+        Cake Feeds {{cake.people_fed_display}} people.
+    {% endfor %}
+
+
+
+
+<br>
+<a href="{% url 'customers:show-venue' venue.slug %}">Go Back</a><br>
+
+</div>
+{% endblock %}

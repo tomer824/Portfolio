@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="text-align: center;">{{venue.hall_name}}</h1>
+
+<div style="text-align: center;">
+
+<h3>Photography and Videography</h3>
+
+Inhouse Photographer Available: {{venue.photovideo.inhouse_photographer}}<br>
+Inhouse Photographer Cost: {{venue.photovideo.inhouse_photography_cost}}<br>
+Inhouse Videographer Available: {{venue.photovideo.inhouse_videographer}}<br>
+Inhouse Videographer Cost: {{venue.photovideo.inhouse_photography_cost}}<br>
+Outside Photographer Permitted: {{venue.photovideo.outside_photography}}<br>
+Outside Videographer Permitted: {{venue.photovideo.outside_videography}}<br>
+
+<br>
+<a href="{% url 'customers:show-venue' venue.slug %}">Go Back</a><br>
+
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="text-align: center;">{{venue.hall_name}}</h1>
+
+<div style="text-align: center;">
+
+<h3>Insurance and Refund Policy</h3>
+
+Insurance Partners: &nbsp; {{venue.insuranceandrefund.insurance_partners}}<br>
+Inhouse Cancellation Insurance Offered: &nbsp; {{venue.insuranceandrefund.cancellation_insurance}}<br>
+Inhouse Cancellation Insurance Cost: &nbsp; {{venue.insuranceandrefund.cancellation_insurance_cost}}<br>
+
+
+<br>
+<h3>Additional Fees To Be Aware Of</h3>
+
+Cutting the Cake Fee: &nbsp; {{venue.cuttingthecakefee.fee}}<br>
+Fee Amount: &nbsp; {{venue.cuttingthecakefee.cake_cutting_fee}}<br><br>
+
+Corkage Fee: &nbsp; {{venue.corkfee.corkage_fee}}<br>
+Fee Amount: &nbsp; {{venue.corkfee.fee}}<br><br>
+
+Closed Bottle Fee: &nbsp; {{venue.closedbottlefee.closed_bottle_fee}}<br>
+Fee Amount: &nbsp; {{venue.closedbottlefee.fee}}<br>
+
+<br>
+<h3>Additional Information</h3>
+
+Candles Permitted: &nbsp; {{venue.additionalinformation.candles}}<br>
+Sparklers Permitted: &nbsp; {{venue.additionalinformation.sparklers}}<br>
+Indoor Smoking Permitted: &nbsp; {{venue.additionalinformation.indoor_smoking}}<br>
+Designated Smoking Area: &nbsp; {{venue.additionalinformation.designated_smoking_area}}<br>
+Secure Room: &nbsp; {{venue.additionalinformation.secure_room}}<br>
+Average Seats Per Table: &nbsp; {{venue.additionalinformation.people_per_table}}<br>
+Provide Booster Seats: &nbsp; {{venue.additionalinformation.provide_booster_seats}}<br>
+Provide Place Cards: &nbsp; {{venue.additionalinformation.provide_place_cards}}<br>
+Secure Room: &nbsp; {{venue.additionalinformation.secure_room}}<br>
+Ceremony and Reception In Separate Rooms: &nbsp; {{venue.additionalinformation.ceremony_reception_seperate_rooms}}<br>
+Ceremony Seating Provided: &nbsp; {{venue.additionalinformation.ceremony_seating_provided}}<br>
+Coat Room: &nbsp; {{venue.additionalinformation.coat_room}}<br>
+Wheelchair Accessible: &nbsp; {{venue.additionalinformation.wheelchair_accessible}}<br>
+Other Notes: &nbsp; {{venue.additionalinformation.other_notes}}<br>
+
+
+<br>
+<a href="{% url 'customers:show-venue' venue.slug %}">Go Back</a><br>
+
+</div>
+{% endblock %}
+
+
+

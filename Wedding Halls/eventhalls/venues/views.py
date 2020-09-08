@@ -422,3 +422,68 @@ def edit_contact_info(request):
                 obj.save()
             return redirect('venues:venues_home')
     return render(request, 'contact-details.html', {'GeneralContactForm': general_contact_form, 'EventDayContactForm': event_day_contact_form})
+
+@login_required
+def wedding_cake(request):
+    linked_wedding_cake = WeddingCake.objects.filter(venue=request.user.venue).exists()
+    if linked_wedding_cake:
+        return redirect('venues:edit-wedding-cake')
+    wedding_cake_form = WeddingCakeForm(request.POST or None)
+    if request.method=='POST':
+        if wedding_cake_form.is_valid():
+            for form in wedding_cake_form:
+                obj = form.save(commit=False)
+                obj.venue = request.user.venue
+                obj.save()
+            return redirect('venues:venues_home')
+    return render(request, 'wedding-cake.html', {'WeddingCakeForm' : wedding_cake_form})
+
+@login_required
+def edit_wedding_cake(request):
+    linked_wedding_cake = WeddingCake.objects.filter(venue=request.user.venue).exists()
+    if not linked_wedding_cake:
+        return redirect('venues:wedding-cake')
+    wedding_cake_form = WeddingCakeForm(request.POST or None, instance=request.user.venue.weddingcake)
+    if request.method=='POST':
+        if wedding_cake_form.is_valid():
+            for form in wedding_cake_form:
+                obj = form.save(commit=False)
+                obj.venue = request.user.venue
+                obj.save()
+            return redirect('venues:venues_home')
+    return render(request, 'wedding-cake.html', {'WeddingCakeForm' : wedding_cake_form})
+
+@login_required
+def photography(request):
+    linked_photography = PhotoVideo.objects.filter(venue=request.user.venue).exists()
+    if linked_photography:
+        return redirect('venues:edit-photography')
+    photography_form = PhotoVideoForm(request.POST or None)
+    if request.method=='POST':
+        if photography_form.is_valid():
+            for form in photography_form:
+                obj = form.save(commit=False)
+                obj.venue = request.user.venue
+                obj.save()
+            return redirect('venues:venues_home')
+    return render(request, 'photography.html', {'PhotoVideoForm' : photography_form})
+
+
+@login_required
+def edit_photography(request):
+    linked_photography = PhotoVideo.objects.filter(venue=request.user.venue).exists()
+    if not linked_photography:
+        return redirect('venues:photography')
+    photography_form = PhotoVideoForm(request.POST or None, instance=request.user.venue.photovideo)
+    if request.method=='POST':
+        if photography_form.is_valid():
+            for form in photography_form:
+                obj = form.save(commit=False)
+                obj.venue = request.user.venue
+                obj.save()
+            return redirect('venues:venues_home')
+    return render(request, 'photography.html', {'PhotoVideoForm' : photography_form})
+
+
+
+

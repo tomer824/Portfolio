@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="text-align: center;">{{venue.hall_name}}</h1>
+
+<h3>Onsite Parking Information </h3>
+
+<p>Onsite Parking Available: {{venue.parking.onsite_parking.boolean |yesno}}</p>
+<p>Max Cars in Parking Lot: {{venue.parking.car_max}}</p>
+<p>Valet Option Available: {{venue.parking.valet.boolean |yesno}}</p>
+<p>Cost of Valet Service: {{venue.parking.valet_cost}}</p>
+<p>Cost of Parking: {{venue.parking.parking.cost}}</p>
+
+
+<h3>Hotel Partners</h3>
+
+<p>Hotel Partners: {{venue.parking.hotel_partners}}</p>
+<p>Average Cost of Rooms {{venue.parking.room_costs}}</p>
+<p>Average Bulk Room Discounts {{venue.parking.bulk_rooms_discount}}</p>
+
+
+<br>
+<a href="{% url 'customers:show-venue' venue.slug %}">Go Back</a><br>
+
+{% endblock %}

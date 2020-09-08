@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="text-align: center;">{{venue.hall_name}}</h1>
+
+<h6>Address</h6>
+<p>{{venue.address_line_1}}<br>
+{{venue.address_line_2}}<br>
+{{venue.city}} {{venue.state}} {{venue.zipcode}}</p>
+
+<p>Max Guests: {{venue.venuedetail.max_guests}}</p>
+<p>Min Guests: {{venue.venuedetail.min_guests}}</p>
+<p>Dance Floor Capacity: &nbsp; {{venue.dancefloor.max_capacity}}</p>
+
+{% for image in venue.venueimage_set.all %}
+<img src="{{ image.image.url }}" alt='imagebroken' style="width: 400px">
+
+{% endfor %}
+<br><br>
+
+<a href="{% url 'customers:show-food' venue.slug %}">See Menu and Pricing Information</a><br>
+<a href="{% url 'customers:show-drink' venue.slug %}">See Drink Pricing Information</a><br>
+<a href="{% url 'customers:show-wedding-cake' venue.slug %}">See Wedding Cake Options</a><br>
+<a href="{% url 'customers:show-accommodations' venue.slug %}">See Venue Accommodations and Parking Information</a><br>
+<a href="{% url 'customers:show-ceremony' venue.slug %}">See Venue Ceremony and Reception Options </a><br>
+<a href="{% url 'customers:show-decorations' venue.slug %}">See Venue Decoration and Flower Options</a><br>
+<a href="{% url 'customers:show-photography' venue.slug %}">See Photography and Videography Options</a><br>
+<a href="{% url 'customers:show-staffing' venue.slug %}">See Venue Staffing Information</a><br>
+<a href="{% url 'customers:show-prewedding-prep' venue.slug %}">See Venue Tastings, Rehearsals and Pre-Wedding Preparation Information</a><br>
+<a href="{% url 'customers:show-additional-details' venue.slug %}">See Additional Venue Details</a><br>
+<a href="{% url 'customers:show-payment' venue.slug %}">See Venue Payment Information</a><br>
+<a href="{% url 'customers:show-contact-information' venue.slug %}">See Venue Contact Information</a><br>
+
+
+<br>
+<a href="#">Go Back to Search Results</a><br>
+{% endblock %}

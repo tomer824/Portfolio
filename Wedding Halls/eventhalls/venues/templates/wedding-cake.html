@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <table>
+    {{WeddingCakeForm}}
+    </table>
+
+    <button type="submit">Submit</button>
+</form>
+
+<br>
+<a href="{% url 'venues:venues_home' %}">Go Back</a>
+{% endblock %}

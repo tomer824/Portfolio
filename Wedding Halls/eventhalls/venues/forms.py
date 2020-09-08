@@ -92,6 +92,30 @@ class DrinkOptionForm(forms.ModelForm):
             'drink_options' : 'Drink Options',
         }
 
+class WeddingCakeForm(forms.ModelForm):
+    class Meta:
+        model = WeddingCake
+        fields = ['provide_wedding_cake', 'cake_option', 'people_fed']
+        labels = {
+            'provide_wedding_cake' : 'Provide Wedding Cake',
+            'cake_option' : 'Cake Options',
+            'people_fed' : 'Cake Feeds How Many People'
+        }
+
+class PhotoVideoForm(forms.ModelForm):
+    class Meta:
+        model = PhotoVideo
+        fields = ['inhouse_photographer', 'inhouse_photography_cost', 'inhouse_videographer', 'inhouse_video_cost',
+        'outside_photography', 'outside_videography']
+        labels = {
+            'inhouse_photographer' : 'Inhouse Photographer',
+            'inhouse_photography_cost' : 'Inhouse Photography Cost',
+            'inhouse_videographer' : 'Inhouse Videographer',
+            'inhouse_video_cost' : 'Inhouse Videography Cost',
+            'outside_photography' : 'Outside Photographer Permitted',
+            'outside_videography' : 'Outside Videographer Permitted'
+        }
+
 class OutdoorOptionsForm(forms.ModelForm):
     class Meta: 
         model = OutdoorOptions

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="text-align: center;">{{venue.hall_name}}</h1>
+
+<div style="text-align: center;">
+    {% for staffing in venue.staff_set.all %}
+    
+        <h2>Staff for {{staff.number_of_guests_display}}</h2>
+        {% for staffing in staff.number_of_waiters.all %}
+        Number of Waiters: &nbsp;{{staff.number_of_waiters}}<br>
+        Number of Bartenders: &nbsp;{{staff.number_of_bartenders}}<br>
+        Number of Other Staff:&nbsp; {{staff.number_of_other_staff}}
+
+        <br>
+        {% endfor %}
+        <br>
+    {% endfor %}
+
+
+
+<br>
+<a href="{% url 'customers:show-venue' venue.slug %}">Go Back</a><br>
+
+</div>
+{% endblock %}

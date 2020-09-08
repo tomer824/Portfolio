@@ -2,13 +2,17 @@
 
 {% block content %}
 <div style="text-align: center;">
-        <h2>Prices for Full Open Bar</h2>
-        {% for pricing in request.user.venue.drinkoption.full_open_bar.all %}
+    {% for drinkoption in request.user.venue.drinkoption_set.all %}
+    
+        <h2>Prices for {{drinkoption.get_drink_options_display}}</h2>
+        {% for pricing in drinkoption.pricing.all %}
         Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
         <br>
         {% endfor %}
         <br>
+    {% endfor %}
 
+{% comment %}
         <h2>Prices for Bottom Shelf Open Bar</h2>
         {% for pricing in request.user.venue.drinkoption.bottom_shelf.all %}
         Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
@@ -35,6 +39,7 @@
         Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
         <br>
     {% endfor %}
+    {% endcomment %}
         <br>
         <a href="{% url 'venues:drink-options' %}">Set / Edit Venue Drink Pricing</a><br>
 </div>

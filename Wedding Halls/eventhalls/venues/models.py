@@ -65,14 +65,13 @@ class DrinkOption(models.Model):
     ('wine_and_beer','Wine and Beer'), ('wine_only','Wine Only'), ('beer_only','Beer Only'))
     drink_options = models.CharField(max_length=30, choices=DRINK_CHOICES,)
     pricing = models.ManyToManyField('Pricing')
-    venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
 
 class WeddingCake(models.Model):
-    provide_wedding_cake = models.BooleanField()
-    two_layer = models.IntegerField(null=True, blank=True)
-    three_layer = models.IntegerField(null=True, blank=True)
-    four_layer = models.IntegerField(null=True, blank=True)
-    five_layer = models.IntegerField(null=True, blank=True)
+    CAKE_CHOICES = (('two_layer','Two Layer Cake'), ('three_layer','Three Layer Cake'), ('four_layer','Four Layer Cake'),('five_layer','Five Layer Cake'))
+    provide_wedding_cake = models.BooleanField(choices=BOOL_CHOICES)
+    cake_option = models.CharField(max_length=50, choices=CAKE_CHOICES,)
+    people_fed = models.IntegerField(null=True, blank=True)
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 
 class Tasting(models.Model):
@@ -142,7 +141,6 @@ class OutdoorOptions(models.Model):
 
 class RainBackUp(models.Model):
     tents_or_canopies = models.BooleanField(choices=BOOL_CHOICES)
-    inside_space = models.BooleanField(choices=BOOL_CHOICES)
     electric_generator = models.BooleanField(choices=BOOL_CHOICES)
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 
@@ -177,6 +175,8 @@ class InsuranceAndRefund(models.Model):
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 
 class PhotoVideo(models.Model):
+    inhouse_photographer = models.BooleanField(choices=BOOL_CHOICES)
+    inhouse_videographer = models.BooleanField(choices=BOOL_CHOICES)
     outside_photography = models.BooleanField(choices=BOOL_CHOICES)
     outside_videography = models.BooleanField(choices=BOOL_CHOICES)
     inhouse_photography_cost = models.IntegerField(null=True, blank=True)
@@ -203,13 +203,13 @@ class ArrivalSetUp(models.Model):
 
 class EventDayContact(models.Model):
     name = models.CharField(max_length=150)
-    phone = models.CharField(max_length=10)
+    phone = models.CharField(max_length=12)
     email = models.EmailField()
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 
 class GeneralContact(models.Model):
     contact_person = models.CharField(max_length=150)
-    phone = models.CharField(max_length=10)
+    phone = models.CharField(max_length=12)
     email = models.EmailField()
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 

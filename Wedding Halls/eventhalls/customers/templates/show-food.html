@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="text-align: center;">{{venue.hall_name}}</h1>
+
+
+
+
+<ul>
+    {% for foodoption in venue.foodoption_set.all %}
+       <li> Name: &nbsp; {{foodoption.name_of_food}} &nbsp;&nbsp;  
+        Description: &nbsp; {{foodoption.description_of_food}}</li>
+    
+    {% endfor %}
+    </ul>
+
+
+
+<br>
+<a href="{% url 'customers:show-venue' venue.slug %}">Go Back</a><br>
+
+
+{% endblock %}

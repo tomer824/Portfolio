@@ -32,5 +32,10 @@ urlpatterns = [
     path('edit-additional-information/', views.edit_additional_information, name='edit-additional-information'),
     path('venue-pictures/', views.venue_images, name='venue-images'),
     path('delete-venue-pictures/<int:id>', views.delete_image, name='delete-image'),
-    path('current-drink-pricing', views.show_drink_pricing, name='current-drink-pricing')
+    path('current-drink-pricing/', views.show_drink_pricing, name='current-drink-pricing'),
+    path('wedding-cake/', views.wedding_cake, name='wedding-cake'),
+    path('edit-wedding-cake/', views.edit_wedding_cake, name='edit-wedding-cake'),
+    path('photography-and-videography/', views.photography, name='photography'),
+    path('edit-photography-and-videography/', views.edit_photography, name='edit-photography')
 ]
+
