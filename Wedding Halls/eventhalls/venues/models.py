@@ -69,10 +69,9 @@ class DrinkOption(models.Model):
 
 class WeddingCake(models.Model):
     CAKE_CHOICES = (('two_layer','Two Layer Cake'), ('three_layer','Three Layer Cake'), ('four_layer','Four Layer Cake'),('five_layer','Five Layer Cake'))
-    provide_wedding_cake = models.BooleanField(choices=BOOL_CHOICES)
     cake_option = models.CharField(max_length=50, choices=CAKE_CHOICES,)
-    people_fed = models.IntegerField(null=True, blank=True)
-    venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
+    pricing = models.ManyToManyField('Pricing')
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name='cakes')
 
 class Tasting(models.Model):
     tastings_offered = models.BooleanField(choices=BOOL_CHOICES)
@@ -96,7 +95,7 @@ class ClosedBottleFee(models.Model):
     venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
 
 class Staff(models.Model):
-    venue = models.OneToOneField(Venue, on_delete=models.CASCADE)
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
     number_of_guests = models.IntegerField()
     number_of_waiters = models.IntegerField()
     number_of_bartenders = models.IntegerField()
@@ -218,6 +217,7 @@ class VenueImage(models.Model):
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
 
 class AdditionalInformation(models.Model):
+    provide_wedding_cake = models.BooleanField(choices=BOOL_CHOICES)
     candles = models.BooleanField(choices=BOOL_CHOICES)
     sparklers = models.BooleanField(choices=BOOL_CHOICES)
     indoor_smoking = models.BooleanField(choices=BOOL_CHOICES)

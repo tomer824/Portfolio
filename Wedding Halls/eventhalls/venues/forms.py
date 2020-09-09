@@ -95,11 +95,9 @@ class DrinkOptionForm(forms.ModelForm):
 class WeddingCakeForm(forms.ModelForm):
     class Meta:
         model = WeddingCake
-        fields = ['provide_wedding_cake', 'cake_option', 'people_fed']
+        fields = ['cake_option']
         labels = {
-            'provide_wedding_cake' : 'Provide Wedding Cake',
             'cake_option' : 'Cake Options',
-            'people_fed' : 'Cake Feeds How Many People'
         }
 
 class PhotoVideoForm(forms.ModelForm):

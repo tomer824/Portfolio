@@ -6,20 +6,20 @@
 
 <div style="text-align: center;">
 <h3>Indoor Options</h3>
-Indoor Reception Available: {{venue.indooroptions.indoor_reception.boolean |yesno}}<br>
-Indoor Ceremony Available: {{venue.indooroptions.indoor_ceremony.boolean |yesno}}<br>
-Indoor Dancing Availabe: {{venue.indooroptions.indoor_dancing.boolean |yesno}}<br>
+Indoor Reception Available: {{venue.indooroptions.indoor_reception |yesno:'Yes,No'}}<br>
+Indoor Ceremony Available: {{venue.indooroptions.indoor_ceremony |yesno:'Yes,No'}}<br>
+Indoor Dancing Availabe: {{venue.indooroptions.indoor_dancing |yesno:'Yes,No'}}<br>
 
 <br>
 <h3>Outdoor Options</h3>
-Outdoor Reception Available: {{venue.outdooroptions.outdoor_reception.boolean |yesno}}<br>
-Outdoor Ceremony Available: {{venue.outdooroptions.outdoor_ceremony.boolean |yesno}}<br>
-Outdoor Dancing Available: {{venue.outdooroptions.outdoor_dancing.boolean |yesno}}<br>
+Outdoor Reception Available: {{venue.outdooroptions.outdoor_reception.boolean |yesno:'Yes,No'}}<br>
+Outdoor Ceremony Available: {{venue.outdooroptions.outdoor_ceremony.boolean |yesno:'Yes,No'}}<br>
+Outdoor Dancing Available: {{venue.outdooroptions.outdoor_dancing.boolean |yesno:'Yes,No'}}<br>
 
 <br>
 <h3>Outdoor Rain Backup</h3>
-Tents or Canapies Available: {{venue.rainbackup.tents_or_canopies.boolean |yesno}}<br>
-Electric Generator Available: {{venue.rainbackup.electric_generator.boolean |yesno}}<br>
+Tents or Canapies Available: {{venue.rainbackup.tents_or_canopies.boolean |yesno:'Yes,No'}}<br>
+Electric Generator Available: {{venue.rainbackup.electric_generator.boolean |yesno:'Yes,No'}}<br>
 
 <br>
 <a href="{% url 'customers:show-venue' venue.slug %}">Go Back</a><br>

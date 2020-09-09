@@ -6,15 +6,18 @@
 
 <div style="text-align: center;">
 
-    Venue Provides Wedding Cake:&nbsp; {{venue.weddingcake.provide_wedding_cake}}<br>
+    Venue Provides Wedding Cake:&nbsp; {{venue.additionalinformation.provide_wedding_cake}}<br>
 
-    {% for cake in venue.weddingcake_set.all %}
+
+    {% for cake in venue.cakes.all %}
     
-        <h2>Cake Layers: &nbsp;{{cake.get_cake_option_display}}</h2>
-        Cake Feeds {{cake.people_fed_display}} people.
+        <h2>Cake Layers {{cake.get_cake_option_display}}</h2>
+        {% for pricing in cake.pricing.all %}
+        Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
+        <br>
+        {% endfor %}
+        <br>
     {% endfor %}
-
-
 
 
 <br>

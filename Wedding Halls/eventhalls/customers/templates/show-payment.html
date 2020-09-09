@@ -7,13 +7,13 @@
 <div style="text-align: center;">
 
 <h3>Payment Methods</h3>
-Accept Payment By Check: {{venue.paymentmethod.accept_check}}<br>
-Accept Payment By Credit Card: {{venue.paymentmethod.accept_credit_card}}<br>
-Accept Payment By Wire Transfer: {{venue.paymentmethod.wire_transfer}}<br>
-Accept Payment By Cash Only: {{venue.paymentmethod.cash_only}}<br>
+Accept Payment By Check: {{venue.paymentmethod.accept_check |yesno:'Yes,No'}}<br>
+Accept Payment By Credit Card: {{venue.paymentmethod.accept_credit_card |yesno:'Yes,No'}}<br>
+Accept Payment By Wire Transfer: {{venue.paymentmethod.wire_transfer |yesno:'Yes,No'}}<br>
+Accept Payment By Cash Only: {{venue.paymentmethod.cash_only |yesno:'Yes,No'}}<br>
 
 <h3>Payment Plan Options</h3>
-Payment Plan Options Available: {{venue.paymentplan.payment_plan_option}}<br>
+Payment Plan Options Available: {{venue.paymentplan.payment_plan_option |yesno:'Yes,No'}}<br>
 How Many Months For Payment Plan: {{venue.paymentplan.months}}<br>
 Last Payment of Payment Plan Due By: {{venue.paymentplan.last_payment_deadline}}<br>
 

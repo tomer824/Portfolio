@@ -289,8 +289,6 @@ def edit_ceremony_and_reception(request):
 
 @login_required
 def staffing(request):
-    if Staff.objects.filter(venue=request.user.venue).exists():
-        return redirect('venues:edit-staffing')
     staff_form = StaffForm(request.POST or None)
     if request.method == 'POST':
         if staff_form.is_valid():
@@ -300,18 +298,6 @@ def staffing(request):
         return redirect('venues:venues_home')
     return render(request, 'staffing-options.html', {'StaffForm' : staff_form})
 
-@login_required
-def edit_staffing(request):
-    if not Staff.objects.filter(venue=request.user.venue).exists():
-        return redirect('venues:staffing')
-    staff_form = StaffForm(request.POST or None, instance=request.user.venue.staff)
-    if request.method == 'POST':
-        if staff_form.is_valid():
-            obj = staff_form.save(commit=False)
-            obj.venue = request.user.venue
-            obj.save()
-        return redirect('venues:venues_home')
-    return render(request, 'staffing-options.html', {'StaffForm' : staff_form})
 
 @login_required
 def accommodations_and_parking(request):
@@ -425,33 +411,21 @@ def edit_contact_info(request):
 
 @login_required
 def wedding_cake(request):
-    linked_wedding_cake = WeddingCake.objects.filter(venue=request.user.venue).exists()
-    if linked_wedding_cake:
-        return redirect('venues:edit-wedding-cake')
     wedding_cake_form = WeddingCakeForm(request.POST or None)
+    pricing_formset = PricingFormSet(request.POST or None)
     if request.method=='POST':
-        if wedding_cake_form.is_valid():
-            for form in wedding_cake_form:
-                obj = form.save(commit=False)
-                obj.venue = request.user.venue
-                obj.save()
+        if wedding_cake_form.is_valid() and pricing_formset.is_valid():
+            wedding_cake = wedding_cake_form.save(commit=False)
+            wedding_cake.venue = request.user.venue
+            wedding_cake.save()
+            for form in pricing_formset:
+                pricing = form.save(commit=False)
+                pricing.venue = request.user.venue
+                pricing.save()
+                wedding_cake.pricing.add(pricing)
             return redirect('venues:venues_home')
-    return render(request, 'wedding-cake.html', {'WeddingCakeForm' : wedding_cake_form})
+    return render(request, 'wedding-cake.html', {'WeddingCakeForm' : wedding_cake_form, 'formset' : pricing_formset})
 
-@login_required
-def edit_wedding_cake(request):
-    linked_wedding_cake = WeddingCake.objects.filter(venue=request.user.venue).exists()
-    if not linked_wedding_cake:
-        return redirect('venues:wedding-cake')
-    wedding_cake_form = WeddingCakeForm(request.POST or None, instance=request.user.venue.weddingcake)
-    if request.method=='POST':
-        if wedding_cake_form.is_valid():
-            for form in wedding_cake_form:
-                obj = form.save(commit=False)
-                obj.venue = request.user.venue
-                obj.save()
-            return redirect('venues:venues_home')
-    return render(request, 'wedding-cake.html', {'WeddingCakeForm' : wedding_cake_form})
 
 @login_required
 def photography(request):

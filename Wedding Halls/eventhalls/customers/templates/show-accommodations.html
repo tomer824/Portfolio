@@ -6,9 +6,9 @@
 
 <h3>Onsite Parking Information </h3>
 
-<p>Onsite Parking Available: {{venue.parking.onsite_parking.boolean |yesno}}</p>
+<p>Onsite Parking Available: {{venue.parking.onsite_parking |yesno:'Yes,No'}}</p>
 <p>Max Cars in Parking Lot: {{venue.parking.car_max}}</p>
-<p>Valet Option Available: {{venue.parking.valet.boolean |yesno}}</p>
+<p>Valet Option Available: {{venue.parking.valet |yesno:'Yes,No' }}</p>
 <p>Cost of Valet Service: {{venue.parking.valet_cost}}</p>
 <p>Cost of Parking: {{venue.parking.parking.cost}}</p>
 

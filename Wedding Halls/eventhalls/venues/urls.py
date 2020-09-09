@@ -19,7 +19,6 @@ urlpatterns = [
     path('ceremony-and-reception/', views.ceremony_and_reception, name='ceremony-and-reception'),
     path('edit-ceremony-and-reception/', views.edit_ceremony_and_reception, name='edit-ceremony-and-reception'),
     path('staffing/', views.staffing, name='staffing'),
-    path('edit-staffing/', views.edit_staffing, name='edit-staffing'),
     path('accommodations-and-parking/', views.accommodations_and_parking, name='accommodations-and-parking'),
     path('edit-accommodations-and-parking/', views.edit_accommodations_and_parking, name='edit-accommodations-and-parking'),
     path('payment-options/', views.payment_options, name='payment-options'),
@@ -34,7 +33,6 @@ urlpatterns = [
     path('delete-venue-pictures/<int:id>', views.delete_image, name='delete-image'),
     path('current-drink-pricing/', views.show_drink_pricing, name='current-drink-pricing'),
     path('wedding-cake/', views.wedding_cake, name='wedding-cake'),
-    path('edit-wedding-cake/', views.edit_wedding_cake, name='edit-wedding-cake'),
     path('photography-and-videography/', views.photography, name='photography'),
     path('edit-photography-and-videography/', views.edit_photography, name='edit-photography')
 ]

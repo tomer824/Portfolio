@@ -7,14 +7,12 @@
 <div style="text-align: center;">
     {% for staffing in venue.staff_set.all %}
     
-        <h2>Staff for {{staff.number_of_guests_display}}</h2>
-        {% for staffing in staff.number_of_waiters.all %}
-        Number of Waiters: &nbsp;{{staff.number_of_waiters}}<br>
-        Number of Bartenders: &nbsp;{{staff.number_of_bartenders}}<br>
-        Number of Other Staff:&nbsp; {{staff.number_of_other_staff}}
+        Staff for {{staffing.number_of_guests}} Guests<br>
+        Number of Waiters: &nbsp;{{staffing.number_of_waiters}}<br>
+        Number of Bartenders: &nbsp;{{staffing.number_of_bartenders}}<br>
+        Number of Other Staff:&nbsp; {{staffing.number_of_other_staff}}<br>
 
-        <br>
-        {% endfor %}
+
         <br>
     {% endfor %}
 

@@ -8,24 +8,24 @@
 
     
 <h3>Decoration Options</h3>
-Venue Provides Decorations: {{venue.decoration.provide_decorations}}<br>
+Venue Provides Decorations: {{venue.decoration.provide_decorations |yesno:'Yes,No'}}<br>
 Venue Decorations Pricing: {{venue.decoration.decorations_pricing}}<br>
-Outside Decorations Permitted: {{venue.decoration.outside_decorations}}<br>
+Outside Decorations Permitted: {{venue.decoration.outside_decorations |yesno:'Yes,No'}}<br>
 
 <br>
 <h3>Centerpiece Options</h3>
-Venue Provides Centerpieces: {{venue.centerpiece.provide_centerpieces}}<br>
+Venue Provides Centerpieces: {{venue.centerpiece.provide_centerpieces |yesno:'Yes,No'}}<br>
 Venue Centerpiece Pricing: {{venue.centerpiece.basic_pricing}}<br>
-Custom Centerpiece Design Options: {{venue.centerpiece.custom_design}}<br>
+Custom Centerpiece Design Options: {{venue.centerpiece.custom_design |yesno:'Yes,No'}}<br>
 Average Custom Centerpiece Design Pricing: {{venue.centerpiece.custom_pricing}}<br>
-Outside Centerpieces Permitted: {{venue.centerpiece.outside_centerpieces_allowed}}<br>
+Outside Centerpieces Permitted: {{venue.centerpiece.outside_centerpieces_allowed |yesno:'Yes,No'}}<br>
 
 <br>
 <h3>Floral Arrangement Options</h3>
 Venue Floral Pricing: {{venue.flower.basic_florist_pricing}}<br>
-Custom Floral Arrangements Available: {{venue.flower.custom_floral_design}}<br>
+Custom Floral Arrangements Available: {{venue.flower.custom_floral_design |yesno:'Yes,No'}}<br>
 Average Custom Floral Arrangement Pricing: {{venue.flower.custom_floral_pricing}}<br>
-Outside Florist Permitted: {{venue.flower.outside_florist}}<br>
+Outside Florist Permitted: {{venue.flower.outside_florist |yesno:'Yes,No'}}<br>
 
 <br>
 <a href="{% url 'customers:show-venue' venue.slug %}">Go Back</a><br>

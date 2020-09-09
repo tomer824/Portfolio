@@ -7,14 +7,14 @@
 <div style="text-align: center;">
 
 <h3>Tastings</h3>
-Tastings Offered:&nbsp; {{venue.tasting.tastings_offered}}<br>
+Tastings Offered:&nbsp; {{venue.tasting.tastings_offered |yesno:'Yes,No'}}<br>
 Cost for Tasting: &nbsp;{{venue.tasting.tasting_price}}<br>
 
 <br>
 <h3>Rehearsals</h3>
-Rehearsal Dinner Option: &nbsp;{{venue.rehearsal.rehearsal_dinners}}<br>
+Rehearsal Dinner Option: &nbsp;{{venue.rehearsal.rehearsal_dinners |yesno:'Yes,No'}}<br>
 Rehearsal Dinner Cost: &nbsp;{{venue.rehearsal.rehearsal_dinner_cost}}<br>
-Rehearsal Ceremony Option: &nbsp;{{venue.rehearsal.rehearsal_ceremonies}}<br>
+Rehearsal Ceremony Option: &nbsp;{{venue.rehearsal.rehearsal_ceremonies |yesno:'Yes,No'}}<br>
 Rehearsal Ceremony Cost:&nbsp; {{venue.rehearsal.rehearsal_ceremony_cost}}<br>
 
 <br>

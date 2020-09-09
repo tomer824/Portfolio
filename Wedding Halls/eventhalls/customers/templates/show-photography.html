@@ -8,12 +8,12 @@
 
 <h3>Photography and Videography</h3>
 
-Inhouse Photographer Available: {{venue.photovideo.inhouse_photographer}}<br>
+Inhouse Photographer Available: {{venue.photovideo.inhouse_photographer |yesno:'Yes,No'}}<br>
 Inhouse Photographer Cost: {{venue.photovideo.inhouse_photography_cost}}<br>
-Inhouse Videographer Available: {{venue.photovideo.inhouse_videographer}}<br>
+Inhouse Videographer Available: {{venue.photovideo.inhouse_videographer |yesno:'Yes,No'}}<br>
 Inhouse Videographer Cost: {{venue.photovideo.inhouse_photography_cost}}<br>
-Outside Photographer Permitted: {{venue.photovideo.outside_photography}}<br>
-Outside Videographer Permitted: {{venue.photovideo.outside_videography}}<br>
+Outside Photographer Permitted: {{venue.photovideo.outside_photography |yesno:'Yes,No'}}<br>
+Outside Videographer Permitted: {{venue.photovideo.outside_videography |yesno:'Yes,No'}}<br>
 
 <br>
 <a href="{% url 'customers:show-venue' venue.slug %}">Go Back</a><br>
