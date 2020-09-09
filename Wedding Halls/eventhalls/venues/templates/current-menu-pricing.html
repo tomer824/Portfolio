@@ -9,10 +9,10 @@
 
 
 {% for foodoption in request.user.venue.foodoption_set.all %}
-    <h1>{{foodoption.name_of_food}}</h1>
-    <h1>{{foodoption.description_of_food}}</h1>
+    <h2>{{foodoption.name_of_food}}</h2>
+    <h4>{{foodoption.description_of_food}}</h4>
     {% for pricing in foodoption.pricing.all %}
-       <p> Number of Guests{{pricing.amount_of_people}} Cost {{pricing.cost}} </p>
+       <p> Number of Guests &nbsp;{{pricing.amount_of_people}} &nbsp;&nbsp;Cost &nbsp; {{pricing.cost}} </p>
     {% endfor %}
 {% endfor %}
 

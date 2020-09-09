@@ -11,7 +11,7 @@ class CustomerForm(forms.ModelForm):
 class VenueForm(forms.ModelForm):
     class Meta:
         model = Venue
-        exclude = ['user']
+        exclude = ['user', 'slug']
 
 class CustomUserSignup(UserCreationForm):
     class Meta:

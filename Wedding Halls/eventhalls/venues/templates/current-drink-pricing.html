@@ -12,34 +12,7 @@
         <br>
     {% endfor %}
 
-{% comment %}
-        <h2>Prices for Bottom Shelf Open Bar</h2>
-        {% for pricing in request.user.venue.drinkoption.bottom_shelf.all %}
-        Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
-        <br>
-        {% endfor %}
-        <br>
 
-        <h2>Prices for Wine and Beer Only</h2>
-        {% for pricing in request.user.venue.drinkoption.wine_and_beer.all %}
-        Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
-        <br>
-        {% endfor %}
-        <br>
-
-        <h2>Prices for Wine Only</h2>
-        {% for pricing in request.user.venue.drinkoption.wine_only.all %}
-        Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
-        <br>
-        {% endfor %}
-        <br>
-
-        <h2>Prices for Beer Only</h2>
-        {% for pricing in request.user.venue.drinkoption.beer_only.all %}
-        Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
-        <br>
-    {% endfor %}
-    {% endcomment %}
         <br>
         <a href="{% url 'venues:drink-options' %}">Set / Edit Venue Drink Pricing</a><br>
 </div>

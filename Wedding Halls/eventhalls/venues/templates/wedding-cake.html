@@ -35,13 +35,13 @@
           $('#id_form-TOTAL_FORMS').val(parseInt(form_idx) + 1);
       });
       </script>
-    
-    
-    
-    
+  
     
     </form>
 
-<br>
+  <br>
+    <a href="{% url 'venues:current-cake-details' %}">See Current Wedding Cake Details</a>
+
+<br><br>
 <a href="{% url 'venues:venues_home' %}">Go Back</a>
 {% endblock %}

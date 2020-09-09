@@ -33,6 +33,7 @@ urlpatterns = [
     path('delete-venue-pictures/<int:id>', views.delete_image, name='delete-image'),
     path('current-drink-pricing/', views.show_drink_pricing, name='current-drink-pricing'),
     path('wedding-cake/', views.wedding_cake, name='wedding-cake'),
+    path('current-wedding-cake-details/', views.show_wedding_cake, name='current-cake-details'),
     path('photography-and-videography/', views.photography, name='photography'),
     path('edit-photography-and-videography/', views.edit_photography, name='edit-photography')
 ]

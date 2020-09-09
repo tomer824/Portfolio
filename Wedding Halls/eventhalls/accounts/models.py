@@ -28,7 +28,7 @@ class Venue(models.Model):
     state = models.CharField(max_length=20, choices = CHOICES)
     zipcode = models.CharField(max_length=5)
     user = models.OneToOneField(User, on_delete = models.CASCADE)
-    slug = models.SlugField()
+    slug = models.SlugField(null=True, blank=True)
 
     def __str__(self):
         return self.hall_name

@@ -4,12 +4,11 @@ from .models import *
 class VenueDetailForm(forms.ModelForm):
     class Meta:
         model = VenueDetail
-        fields = ['max_guests', 'min_guests', 'min_fee', 'outside_catering', 'venue_only_price', 'deposit_fee', 'non_refundable_percent'
+        fields = ['max_guests', 'min_guests', 'outside_catering', 'venue_only_price', 'deposit_fee', 'non_refundable_percent'
         ]
         labels = {
             'max_guests' : 'Max Guests',
             'min_guests' : 'Min Guests',
-            'min_fee' : 'Min Fee',
             'outside_catering' : 'Outside Catering Permitted',
             'venue_only_price' : 'Venue Only Price',
             'deposit_fee' : 'Minimum Deposit Fee',
@@ -160,8 +159,9 @@ class AdditionalInformationForm(forms.ModelForm):
         model = AdditionalInformation
         fields = ['candles', 'sparklers', 'indoor_smoking', 'designated_smoking_area', 'secure_room',
         'people_per_table', 'provide_booster_seats', 'provide_place_cards', 'ceremony_reception_seperate_rooms',
-        'ceremony_seating_provided', 'coat_room', 'wheelchair_accessible']
+        'ceremony_seating_provided', 'coat_room', 'wheelchair_accessible', 'provide_wedding_cake']
         labels = {
+            'provide_wedding_cake' : 'Provide Wedding Cake',
             'candles' : 'Are candles allowed to be used',
             'sparklers' : 'Are sparklers allowed to be used',
             'indoor_smoking' : 'Is indoor smoking permitted',
@@ -326,5 +326,6 @@ class PricingForm(forms.ModelForm):
         }
     
 PricingFormSet = forms.formset_factory(PricingForm, extra=1)
+StaffFormSet = forms.formset_factory(StaffForm, extra=1)
 
 

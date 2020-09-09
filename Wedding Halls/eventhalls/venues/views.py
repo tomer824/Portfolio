@@ -28,7 +28,7 @@ def general_information(request):
     return render(request, 'general-information.html', {'VenueDetailForm':venue_detail_form, 
     'DanceFloorForm':dance_floor_form, 'VenueDetailForm2' : venue_detail_form_2})
 
-#is instance line correct - no spaces and venuedetail2?
+
 @login_required
 def edit_general_information(request):
     linked_venuedetail = VenueDetail.objects.filter(venue=request.user.venue).exists()
@@ -162,7 +162,7 @@ def edit_additional_information(request):
 @login_required
 def dietary_options(request):
     if DietaryOption.objects.filter(venue=request.user.venue).exists():
-        return redirect('venues:edit-dietary-options')
+        return redirect('venues:edit-dietary-option')
     dietary_option_form = DietaryOptionForm(request.POST or None)
     if request.method == 'POST':
         if dietary_option_form.is_valid():
@@ -218,7 +218,7 @@ def add_drink_options(request):
                 pricing.venue = request.user.venue
                 pricing.save()
                 drink_option.pricing.add(pricing)
-        return redirect('venues:venues_home')
+        return redirect('venues:current-drink-pricing')
     return render(request, 'drink-options.html', {'DrinkOptionForm' : drink_option_form, 'formset' : pricing_formset})
 
 @login_required
@@ -235,7 +235,7 @@ def add_food_option(request):
                 pricing.venue = request.user.venue
                 pricing.save()
                 food_option.pricing.add(pricing)
-        return redirect('venues:venues_home')
+        return redirect('venues:current-menu-pricing')
     return render(request, 'menu-options.html', {'FoodOptionForm' : food_option_form, 'formset' : pricing_formset})
 
 @login_required
@@ -289,14 +289,16 @@ def edit_ceremony_and_reception(request):
 
 @login_required
 def staffing(request):
-    staff_form = StaffForm(request.POST or None)
+    staff_form_set = StaffFormSet(request.POST or None)
     if request.method == 'POST':
-        if staff_form.is_valid():
-            obj = staff_form.save(commit=False)
-            obj.venue = request.user.venue
-            obj.save()
-        return redirect('venues:venues_home')
-    return render(request, 'staffing-options.html', {'StaffForm' : staff_form})
+        if staff_form_set.is_valid():
+            for form in staff_form_set:
+                obj = form.save(commit=False)
+                obj.venue = request.user.venue
+                obj.save()
+            return redirect('venues:venues_home')
+    return render(request, 'staffing-options.html', {'formset' : staff_form_set})
+
 
 
 @login_required
@@ -423,9 +425,12 @@ def wedding_cake(request):
                 pricing.venue = request.user.venue
                 pricing.save()
                 wedding_cake.pricing.add(pricing)
-            return redirect('venues:venues_home')
+            return redirect('venues:current-cake-details')
     return render(request, 'wedding-cake.html', {'WeddingCakeForm' : wedding_cake_form, 'formset' : pricing_formset})
 
+@login_required
+def show_wedding_cake(request):
+    return render(request, 'current-wedding-cake-details.html')
 
 @login_required
 def photography(request):
@@ -434,11 +439,10 @@ def photography(request):
         return redirect('venues:edit-photography')
     photography_form = PhotoVideoForm(request.POST or None)
     if request.method=='POST':
-        if photography_form.is_valid():
-            for form in photography_form:
-                obj = form.save(commit=False)
-                obj.venue = request.user.venue
-                obj.save()
+        if photography_form.is_valid():        
+            obj = photography_form.save(commit=False)
+            obj.venue = request.user.venue
+            obj.save()
             return redirect('venues:venues_home')
     return render(request, 'photography.html', {'PhotoVideoForm' : photography_form})
 

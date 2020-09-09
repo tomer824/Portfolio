@@ -5,11 +5,10 @@ from accounts.models import Venue
 BOOL_CHOICES = ((True, 'Yes'), (False, 'No'))
 
 class VenueDetail(models.Model):
-    max_guests = models.IntegerField()
+    max_guests = models.IntegerField(null=True, blank=True)
     min_guests = models.IntegerField(null=True, blank=True)
     recommended_tip = models.IntegerField(null=True, blank=True)
-    min_fee = models.IntegerField()
-    outside_catering = models.BooleanField(choices=BOOL_CHOICES)
+    outside_catering = models.BooleanField(choices=BOOL_CHOICES, null=True, blank=True)
     venue_only_price = models.IntegerField(blank=True, null = True)
     deposit_fee = models.IntegerField(null=True, blank=True)
     non_refundable_percent = models.IntegerField(null=True, blank=True)

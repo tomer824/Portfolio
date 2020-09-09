@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="text-align: center;">
+    
+<h3>Current Cake Pricing Options</h3>
+
+
+    {% for cake in request.user.venue.cakes.all %}
+    
+        <h2>Prices for {{cake.get_cake_option_display}}</h2>
+        {% for pricing in cake.pricing.all %}
+        Number of Guests: {{pricing.amount_of_people}}  Cost: {{pricing.cost}}
+        <br>
+        {% endfor %}
+        <br>
+    {% endfor %}
+
+<br>
+<a href="{% url 'venues:wedding-cake' %}">Set / Edit Wedding Cake Details</a>
+
+<br><br>
+<a href="{% url 'venues:venues_home' %}">Go Back</a>
+</div>
+{% endblock %}
